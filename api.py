@@ -742,18 +742,12 @@ facts = [
 ]
 
 
-# To track which fact was last sent
-index = 0
 
-@app.get("/next-fact")
-def get_next_fact():
-    """Returns the next fact in the list"""
-    global index
-    if index >= len(facts):
-        index = 0  # Reset when all facts are sent
-    fact = facts[index]
-    index += 1
+
+@app.get("/random-fact")
+def get_random_fact():
+    """Returns a random fact from the list"""
+    fact = random.choice(facts)  # Select a random fact
     return {"fact": fact}
-
 # Run the API using:
 # uvicorn api:app --reload
